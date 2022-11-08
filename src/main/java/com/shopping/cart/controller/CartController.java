@@ -12,9 +12,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping("api/cart")
 public class CartController {
     @Autowired
     private CartService cartService;
+
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @GetMapping("")
     public ResponseEntity<List<Cart>> getAllCart() {

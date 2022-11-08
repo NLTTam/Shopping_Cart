@@ -7,13 +7,14 @@ import com.shopping.cart.payload.CartRequest;
 import com.shopping.cart.repository.CartRepository;
 import com.shopping.cart.repository.ProductRepository;
 import com.shopping.cart.repository.UserRepository;
+import com.shopping.cart.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CartServiceImpl {
+public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartRepository cartRepository;
@@ -23,6 +24,12 @@ public class CartServiceImpl {
 
     @Autowired
     private ProductRepository productRepository;
+
+    public CartServiceImpl (CartRepository cartRepository, UserRepository userRepository, ProductRepository productRepository) {
+        this.cartRepository = cartRepository;
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
+    }
 
     public Cart createCart(CartRequest cartRequest) {
         User user = userRepository.findById(cartRequest.getUserId()).get();
