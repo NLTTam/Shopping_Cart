@@ -1,19 +1,23 @@
-package com.backend.shoppingCart.Services.Implementation;
+package com.shopping.cart.service.Implementation;
 
-import com.backend.shoppingCart.Services.ProductService;
-import com.backend.shoppingCart.model.Product;
-import com.backend.shoppingCart.payload.ProductRequest;
-import com.backend.shoppingCart.repositories.ProductRepository;
+import com.shopping.cart.model.Product;
+import com.shopping.cart.payload.ProductRequest;
+import com.shopping.cart.repository.ProductRepository;
+import com.shopping.cart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("ProductServiceImpl")
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    public ProductServiceImpl (ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public List<Product> getAllProduct(){
@@ -21,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(int productId) {
+    public Product getProductById(long productId) {
         return productRepository.findById(productId).get();
     }
 
@@ -38,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProductById(int productId, ProductRequest productRequest){
+    public Product updateProductById(long productId, ProductRequest productRequest){
         Product product = productRepository.findById(productId).get();
         product.setInformation(productRequest.getInformation());
         product.setAmount(productRequest.getAmount());
@@ -50,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product deleteProductById(int productId) {
+    public Product deleteProductById(long productId) {
         Product product = productRepository.findById(productId).get();
         productRepository.delete(product);
         return product;

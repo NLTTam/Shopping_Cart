@@ -1,6 +1,7 @@
-package com.backend.shoppingCart.payload;
+package com.shopping.cart.payload;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

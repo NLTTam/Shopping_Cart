@@ -1,4 +1,4 @@
-package com.backend.shoppingCart.model;
+package com.shopping.cart.model;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -35,3 +35,4 @@ public class Product {
     private int amount;
 
 }
+

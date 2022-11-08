@@ -1,22 +1,23 @@
-package com.backend.shoppingCart.controller;
+package com.shopping.cart.controller;
 
-import com.backend.shoppingCart.Services.ProductService;
-import com.backend.shoppingCart.model.Product;
-import com.backend.shoppingCart.payload.ProductRequest;
+import com.shopping.cart.model.Product;
+import com.shopping.cart.payload.ProductRequest;
+import com.shopping.cart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/employee")
+@RequestMapping("api/product")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    public ProductController(){}
 
     @GetMapping("")
     public ResponseEntity<List<Product>> getAllProduct() {
@@ -24,17 +25,17 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable(value = "id") int productId) {
+    public ResponseEntity<Product> getProductById(@PathVariable(value = "id") long productId) {
         return ResponseEntity.ok().body(productService.getProductById(productId));
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductRequest product) {
+    public ResponseEntity<Product> createProduct( @RequestBody ProductRequest product) {
         return ResponseEntity.ok().body(productService.createProduct(product));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProductById(@PathVariable(value = "id") int productId, @Valid @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<Product> updateProductById(@PathVariable(value = "id") int productId, @RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok().body(productService.updateProductById(productId, productRequest));
     }
 
